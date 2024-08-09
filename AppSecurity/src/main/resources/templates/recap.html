@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet"
+         href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+      <link rel = "stylesheet"
+         href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+      <script type = "text/javascript"
+         src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
+      <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js">
+      </script> 
+ <script>
+         $(document).ready(function() {
+            $('select').material_select();
+         });
+      </script>
+</head>
+<body>
+ <div class="container">
+ <ul class="pagination">
+    <li class="disabled"><a href="/"><i class="material-icons">chevron_left</i></a></li>
+   
+   
+  </ul>
+
+
+<h5>Grazie per l'acquisto</h5>
+<table>
+        <thead>
+          <tr>
+              <th>Nome prodotto</th>
+              <th>Pezzi acquistati</th>
+             
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr th:each = "prod: ${lista}">
+            <td th:text="${prod.getNome()}"></td>
+            <td  th:text="${prod.getQnt()}"></td>
+           
+          </tr>
+          <tr>
+        
+        </tbody>
+      </table>
+      <h3>La somma totale da pagare è <span th:text= "${somma}"></span></h3>
+
+
+<form action = "/conferma" method = "post">
+<label>Inserisci la mail per confermare l'ordine</label>
+
+<input type = "hidden" th:value=  "${somma}" name ="somma">
+<input type = "text" name = "mail">
+
+ <hr>
+  <label for="testToken">Test Token:</label>
+        <select id="testToken" name="token" required>
+            <option value="tok_visa">Visa Test Card</option>
+            <option value="tok_mastercard">MasterCard Test Card</option>
+            <option value="tok_amex">American Express Test Card</option>
+        </select>
+                        
+            
+<br>
+
+<input type = "submit" value = "conferma">
+</form>
+</div>
+</body>
+</html>
